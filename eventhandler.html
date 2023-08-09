@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popup & listeners</title>
+    <style>
+        body {
+            background-color: #1e272e;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .input-box {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: #dcdde1;
+            width: 200px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #2ecc71;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #27ae60;
+        }
+
+        .colorChange {
+            height: 80px;
+            width: 200px;
+            background-color: #3498db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #content {
+            color: #f5f6fa;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        #dlt-btn {
+            background-color: #e74c3c;
+            margin-left: 10px;
+        }
+
+        #hiddenDiv {
+            display: none;
+            color: #f39c12;
+            font-size: 20px;
+            margin-top: 20px;
+        }
+
+        #show-btn, #prompt, #dyn-btn {
+            margin-top: 20px;
+            background-color: #8e44ad;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="input-box">
+        <input type="text" id="name" placeholder="Enter your name">
+        <br>
+        <button onclick="greetMe()">Greet</button>
+    </div>
+    <div class="colorChange">
+        <button onclick="toggleColor()">Change Color</button>
+    </div>
+    <div>
+        <p id="content">hello, click the button to delete me</p>
+        <button id="dlt-btn" onclick="deletePara()">Delete</button>
+    </div>
+    <div id="hiddenDiv">
+        <p>I was camouflaging!!! Hehehe</p>
+    </div>
+    <button id="show-btn" onclick="showDiv()">See Magic</button>
+    <button id="prompt" onclick="showPrompt()">Prompt</button>
+    <button id="dyn-btn">Dynamic</button>
+    <script>
+        document.getElementById('dyn-btn').addEventListener("click", dynamicAlert, false);
+        function greetMe() {
+            var name = document.getElementById('name').value;
+            alert('Hello ' + name);
+        }
+        function toggleColor() {
+            var color = document.getElementsByClassName('colorChange')[0].style.backgroundColor;
+            document.getElementsByClassName('colorChange')[0].style.backgroundColor = (color === 'red') ? '#3498db' : 'red';
+        }
+        function deletePara() {
+            var sure = confirm("Do you want to delete for sure?");
+            if (sure) {
+                document.getElementById('content').innerHTML = '';
+            }
+        }
+        function showDiv() {
+            var hiddenDiv = document.getElementById('hiddenDiv');
+            var showBtn = document.getElementById('show-btn');
+            hiddenDiv.style.display = (hiddenDiv.style.display === 'block') ? 'none' : 'block';
+            showBtn.innerHTML = (hiddenDiv.style.display === 'block') ? 'Hide again' : 'Show again';
+        }
+        function showPrompt(){
+            var name = prompt('What is your name?');
+            if(name) {
+                alert('Hello ' + name);
+            }
+        }
+        function dynamicAlert(){
+            alert('Hello from dynamic event listener!');
+        }
+    </script>
+</body>
+
+</html>
